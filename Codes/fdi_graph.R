@@ -1,5 +1,5 @@
 library(ggplot2)
-fdi <- read.csv("/home/krishna/Documents/DM/FDI/CSV/FDI.csv",header = TRUE)
+fdi <- read.csv("/home/krishna/Documents/DM/Investment-Driven-Growth/CSV/FDI.csv",header = TRUE)
 industries <- fdi[,1] #First Column contains name of Industry
 fdi <- fdi[,-1]
 time_series <- seq(2000,2016,by = 1)
@@ -18,7 +18,7 @@ for(i in 1:nrow(fdi)){
   all.plots[[i]] <- recordPlot() 
 }
 
-# pdf("/home/krishna/Documents/DM/FDI/Output/Histogram_FDI.pdf",onefile = TRUE)
+pdf("/home/krishna/Documents/DM/Investment-Driven-Growth/Output/Histogram_FDI.pdf",onefile = TRUE)
 for(plot in all.plots){
   replayPlot(plot)
 }

@@ -1,5 +1,5 @@
 library(ggplot2)
-gdp_rate <- read.csv("/home/krishna/Documents/DM/FDI/CSV/GDP_Rate.csv",header = TRUE)
+gdp_rate <- read.csv("/home/krishna/Documents/DM/Investment-Driven-Growth/CSV/GDP_Rate.csv",header = TRUE)
 industries <- gdp_rate[,1] #First Column contains name of Industry
 gdp_rate <- gdp_rate[,-1]
 time_series <- seq(1951,2013,by = 1)
@@ -16,7 +16,7 @@ for(i in 1:nrow(gdp_rate)){
   all.plots[[i]] <- recordPlot() 
 }
 
-pdf("/home/krishna/Documents/DM/FDI/Output/TimeSeries_GDP_Rate.pdf",onefile = TRUE)
+pdf("/home/krishna/Documents/DM/Investment-Driven-Growth/Output/TimeSeries_GDP_Rate.pdf",onefile = TRUE)
 for(plot in all.plots){
   replayPlot(plot)
 }
