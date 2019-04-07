@@ -13,7 +13,7 @@ for(i in 1:nrow(fdi)){
   fdi_per_industry <- fdi[i,]
   plot_data <- data.frame(years = time_series,fdi = as.numeric(fdi_per_industry))
   graph <- ggplot(plot_data,aes(years,fdi)) + geom_bar(stat = "identity",colour = "black",fill = "red") +
-    ggtitle(sectors[i]) + xlab("Time Series") + ylab("FDI (in crores)")
+    ggtitle(sectors[i]) + xlab("Time Series") + ylab("FDI (in US Dollars (millions))")
   plot(graph)
   all.plots[[i]] <- recordPlot() 
 }
