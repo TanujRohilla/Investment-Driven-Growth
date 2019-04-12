@@ -4,6 +4,7 @@ find_linear_relation <- function(gdp,fdi_values){
   combined_data <- (cbind(y = gdp,x = fdi_values))
   
   standard_deviation <- apply(combined_data, 2,sd)  #Finding Standard Deviation of Each Column
+  combined_data <- scale(combined_data) #Standardizing Data
   combined_data <- as.data.frame(scale(combined_data))
   
   linear_model <- lm(y~.,data = combined_data)
@@ -26,14 +27,13 @@ gdp <- t(gdp)
 
 file_name <- "/home/krishna/Documents/DM/Investment-Driven-Growth/Output/GDP_FDI_Model.xlsx"
 
-industry <- 3
 for(industry in 1:length(industries_gdp)){
   fdi_relevant_sectors <- data.frame(fdi[,industry == fdi[1,]])
   info <- find_linear_relation(gdp[,industry],fdi_relevant_sectors[-1,])
   
   length(info$cofficient) = length(info$standard_deviation) #To setup NA values from unknown Cofficients
   actual_cofficient <- (info$cofficient*info$standard_deviation[1])/info$standard_deviation
-
+  
   sectors <- c(paste("",industries_gdp[industry]),"Intercept",paste("",sectors_fdi[industry == fdi[1,]]))
   data <- data.frame(sectors,info$cofficient,actual_cofficient,info$standard_deviation,stringsAsFactors = FALSE)
   colnames(data) <- c("Sectors","Estimated Cofficient","Actual Cofficients","Standard Deviation")
