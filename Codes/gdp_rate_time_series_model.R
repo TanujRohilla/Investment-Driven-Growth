@@ -1,4 +1,4 @@
-detrending_data <- function(data){
+model_creation <- function(data){
   
   resultant_data <- c()
   time_series <- seq(1950,2013,by = 1)
@@ -8,15 +8,19 @@ detrending_data <- function(data){
   
   industry <- 6
   #for(industry in 1:nrow(data)){
-    y <- unlist(data[industry,])
+    temp <- unlist(data[industry,])
+    View(rbind(x,temp))
+    y <- log(temp)
+    
     model <- lm(y ~ x)
     print(summary(model))
     #print(predict(model,data.frame(x = 1)))
-    #prediction <- t(unlist(lapply(x, function(x){predict(model,data.frame(x = x))})))
-    #resultant_data <- rbind(resultant_data,prediction)
-    #View(rbind(prediction,y))
+    prediction <- t(unlist(lapply(x, function(x){predict(model,data.frame(x = x))})))
+    resultant_data <- rbind(resultant_data,prediction)
+    plot(x = time_series,y = exp(prediction),type = "l")
+    View(rbind(exp(prediction),temp))
    #}
 }
 
 gdp_rate <- read.csv("/home/krishna/Documents/DM/Investment-Driven-Growth/CSV/GDP_Graphs.csv",header = TRUE)
-detrending_data(gdp_rate)
+model_creation(gdp_rate)
